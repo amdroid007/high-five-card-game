@@ -15,6 +15,7 @@ public class Deck {
 
     private List<Card> cards = new ArrayList<>();
     private Card currentCard = null;
+    private List<Card.RANK> randomCards = null;
 
     public Deck() {
         createDeck();
@@ -26,7 +27,6 @@ public class Deck {
         addCards();
         shuffle();
         addImagesToCards();
-        addDefaultRules();
 
         Log.d(TAG, "Deck created..");
     }
@@ -54,14 +54,14 @@ public class Deck {
         }
     }
 
-    private void addDefaultRules() {
-        Log.d(TAG, "Adding rules to cards...");
+    public void addDefaultRules() {
+        Log.d(TAG, "Adding default rules to cards...");
 
         Rule rule1 = new Rule(0, "Default. High five the person before you.");
-        Rule rule2 = new Rule(0, "High five the person after you.");
-        Rule rule3 = new Rule(0, "High five yourself.");
-        Rule rule4 = new Rule(0, "High five both players around you.");
-        Rule rule5 = new Rule(0, "Don't do anything. Direction changes.");
+        Rule rule2 = new Rule(1, "High five the person after you.");
+        Rule rule3 = new Rule(2, "High five yourself.");
+        Rule rule4 = new Rule(3, "High five both players around you.");
+        Rule rule5 = new Rule(4, "Don't do anything. Direction changes.");
 
         for (Card card : cards) {
             switch (card.getRank()) {
@@ -120,5 +120,59 @@ public class Deck {
         }
 
         return output;
+    }
+
+    public void addRandomRules() {
+        Log.d(TAG, "Adding random rules to cards...");
+
+        Rule rule0 = new Rule(0, "Default. High five the person before you.");
+        Rule rule1 = new Rule(1, "High five the person after you.");
+        Rule rule2 = new Rule(2, "High five yourself.");
+        Rule rule3 = new Rule(3, "High five both players around you.");
+        Rule rule4 = new Rule(4, "Don't do anything. Direction changes.");
+
+        List<Integer> random = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            random.add(i);
+        }
+        Collections.shuffle(random);
+
+        final Card.RANK[] values = Card.RANK.values();
+
+        for (Card card : cards) {
+            Card.RANK rank = card.getRank();
+
+            if (rank == values[random.get(0)]) {
+                card.setRule(rule1);
+            } else if (rank == values[random.get(1)]) {
+                card.setRule(rule2);
+            } else if (rank == values[random.get(2)]) {
+                card.setRule(rule3);
+            } else if (rank == values[random.get(3)]) {
+                card.setRule(rule4);
+            } else {
+                card.setRule(rule0);
+            }
+        }
+
+        randomCards = new ArrayList<>();
+        randomCards.add(values[random.get(0)]);
+        randomCards.add(values[random.get(1)]);
+        randomCards.add(values[random.get(2)]);
+        randomCards.add(values[random.get(3)]);
+
+    }
+
+    public List<Card.RANK> getRanksWithRandomRules() {
+        return randomCards;
+    }
+
+    public String getRuleDescriptionFromRank(Card.RANK rank) {
+        for (Card card : getCards()) {
+            if (card.getRank() == rank) {
+                return card.getRule().getDescription();
+            }
+        }
+        return null;
     }
 }

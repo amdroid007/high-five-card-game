@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iliaskomp.highfivecardgame.R;
+import com.iliaskomp.highfivecardgame.models.Card;
 import com.iliaskomp.highfivecardgame.models.Deck;
 
 /**
@@ -98,7 +99,8 @@ public class GameFragment extends Fragment{
         mGameOver = false;
         setHasOptionsMenu(true);
 
-        mDeck = new Deck();
+//        Log.d(TAG, mDeck.toString());
+
         drawCardInFragment();
 
         mCardImageView.setOnClickListener(new View.OnClickListener() {
@@ -144,12 +146,23 @@ public class GameFragment extends Fragment{
     private void waitToStart() {
         Log.d(TAG, "Game waits to start...");
 
+        mDeck = new Deck();
+
+
+
         mTextViewMessage.setVisibility(View.VISIBLE);
         mCardImageView.setVisibility(View.GONE);
+
         if (!mRandomMode) {
+            mDeck.addDefaultRules();
             mTextViewMessage.setText("Tap to start the game!");
         } else {
-            mTextViewMessage.setText("Tap to start the game \n Random mode!");
+            mDeck.addRandomRules();
+//            mTextViewMessage.setText(textForRandomMode());
+            mTextViewMessage.setText(textForRandomMode());
+            for (Card.RANK rank : mDeck.getRanksWithRandomRules()) {
+                Log.d(TAG, rank.toString() + "");
+            }
         }
 
         mTextViewMessage.setOnClickListener(new View.OnClickListener() {
@@ -161,6 +174,8 @@ public class GameFragment extends Fragment{
             }
         });
     }
+
+
 
     private void gameOver() {
         mGameOver = true;
@@ -218,8 +233,23 @@ public class GameFragment extends Fragment{
         mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         mTimerSeconds = Integer.parseInt(mPreferences.getString("pref_timer", "")) * 1000 + 100;
-        mRandomMode = Boolean.parseBoolean("pref_random_mode");
-        Log.d("RANDOMMODE", mRandomMode + "");
+        mRandomMode = mPreferences.getBoolean("pref_random_mode", false);
+    }
+
+    private String textForRandomMode() {
+
+        StringBuilder sb = new StringBuilder(6);
+        sb.append("Tap to start the game \n(Random mode!) \n\n\n");
+
+        for (Card.RANK rank : mDeck.getRanksWithRandomRules()) {
+            Log.d(TAG, rank.toString() + "");
+            sb.append(rank.toString())
+                    .append(": ")
+                    .append(mDeck.getRuleDescriptionFromRank(rank))
+                    .append("\n");
+        }
+
+        return sb.toString();
     }
 
     public static GameFragment newInstance() {

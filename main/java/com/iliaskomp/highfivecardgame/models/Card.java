@@ -26,7 +26,7 @@ public class Card {
         JACK,
         QUEEN,
         KING,
-        ACE
+        ACE;
     }
 
     private SUIT mSuit;
