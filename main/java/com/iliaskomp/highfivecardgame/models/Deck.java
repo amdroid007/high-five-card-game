@@ -1,5 +1,7 @@
 package com.iliaskomp.highfivecardgame.models;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +11,8 @@ import java.util.List;
  */
 
 public class Deck {
-    //private final static int NUMBER_OF_CARDS = 52;
+    private static final String TAG = "Deck";
+
     private List<Card> cards = new ArrayList<>();
     private Card currentCard = null;
 
@@ -18,13 +21,18 @@ public class Deck {
     }
 
     private void createDeck() {
+        Log.d(TAG, "Creating deck..");
+
         addCards();
         shuffle();
         addImagesToCards();
         addDefaultRules();
+
+        Log.d(TAG, "Deck created..");
     }
 
     private void addCards() {
+        Log.d(TAG, "Adding cards...");
         Card card;
         for (Card.SUIT suit : Card.SUIT.values()) {
             for (Card.RANK rank : Card.RANK.values()) {
@@ -32,9 +40,14 @@ public class Deck {
                 cards.add(card);
             }
         }
+
+        Log.d(TAG, "Added cards...");
+
     }
 
     private void addImagesToCards() {
+        Log.d(TAG, "Adding images to cards...");
+
         for (Card card : cards) {
             card.setDrawableString(card.getRank().toString().toLowerCase() + "_of_"
                     + card.getSuit().toString().toLowerCase());
@@ -42,6 +55,8 @@ public class Deck {
     }
 
     private void addDefaultRules() {
+        Log.d(TAG, "Adding rules to cards...");
+
         Rule rule1 = new Rule(0, "Default. High five the person before you.");
         Rule rule2 = new Rule(0, "High five the person after you.");
         Rule rule3 = new Rule(0, "High five yourself.");
@@ -66,7 +81,6 @@ public class Deck {
                     card.setRule(rule1);
                     break;
             }
-
         }
 
     }
@@ -81,8 +95,9 @@ public class Deck {
     }
 
     public void drawCard() {
+        this.burnDrawnCard();
+        Log.d(TAG, "Cards size: " + cards.size());
         currentCard = cards.get(0);
-        burnDrawnCard();
     }
 
     public Card getCurrentCard() {
@@ -95,5 +110,15 @@ public class Deck {
 
     public int numberOfCardsLeft() {
         return cards.size();
+    }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for (Card card : cards) {
+            output += card.toString() + "\n";
+        }
+
+        return output;
     }
 }

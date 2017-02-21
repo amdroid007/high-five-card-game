@@ -3,27 +3,39 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-                android:background="@color/colorAccent"
+              android:background="@color/colorAccent"
+              xmlns:tools="http://schemas.android.com/tools"
     >
 
 
 
     <TextView
         android:id="@+id/text_view_message"
-        android:text="Tap to start the game!"
+        tools:text="Tap to start the game!"
+        tools:visibility="gone"
         android:gravity="center"
         android:textSize="24sp"
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <ImageView
-        android:visibility="gone"
+        tools:src="@drawable/eight_of_clubs"
+        tools:visibility="visible"
         android:id="@+id/image_view_cards"
         android:padding="12dp"
-        android:src="@drawable/eight_of_clubs"
+        android:layout_weight="8"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"/>
+
+    <TextView
+        android:id="@+id/text_view_timer"
+        android:textColor="#000000"
+        tools:text="3"
+        android:textSize="36sp"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
 
 
 

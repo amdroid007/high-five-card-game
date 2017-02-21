@@ -1,6 +1,7 @@
 package com.iliaskomp.highfivecardgame;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,19 +15,26 @@ import com.iliaskomp.highfivecardgame.models.Deck;
 /**
  * Created by IliasKomp on 20/02/17.
  */
-
+// TODO check gameover value when onResume?
 public class GameFragment extends Fragment{
     private static final String TAG = "GameFragment";
 
-    private TextView mTextView;
+    private TextView mTextViewMessage;
     private ImageView mCardImageView;
-    private Deck mDeck;
+    private TextView mTextViewTimer;
 
+    private Deck mDeck;
     private boolean mGameOver = false;
+    private boolean mTurnOver = false;
+    private static int mTimerSeconds = 3100;
+    private CountDownTimer mCountDownTimer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        createCountDownTimer();
+        checkForGameOver();
 
     }
 
@@ -35,10 +43,10 @@ public class GameFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         mCardImageView = (ImageView) view.findViewById(R.id.image_view_cards);
-        mTextView = (TextView) view.findViewById(R.id.text_view_message);
+        mTextViewMessage = (TextView) view.findViewById(R.id.text_view_message);
+        mTextViewTimer = (TextView) view.findViewById(R.id.text_view_timer);
 
         waitToStart();
-        checkForGameOver();
 
         return view;
     }
@@ -47,23 +55,29 @@ public class GameFragment extends Fragment{
         Log.d(TAG, "Game starts");
 
         mDeck = new Deck();
-        mDeck.drawCard();
-        mCardImageView.setImageResource(getResourceIdForCurrentCard());
+        drawCardInFragment();
+
 
         mCardImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (mDeck.numberOfCardsLeft() == 0) {
                     mGameOver = true;
                 }
 
-                while (!mGameOver) {
-                    mDeck.drawCard();
-                    mCardImageView.setImageResource(getResourceIdForCurrentCard());
+                if (!mGameOver) {
+                    drawCardInFragment();
                 }
             }
         });
 
+    }
+
+    private void drawCardInFragment() {
+        mDeck.drawCard();
+        mCardImageView.setImageResource(getResourceIdForCurrentCard());
+        mCountDownTimer.start();
     }
 
     private int getResourceIdForCurrentCard() {
@@ -76,10 +90,14 @@ public class GameFragment extends Fragment{
     private void waitToStart() {
         Log.d(TAG, "Game waits to start...");
 
-        mTextView.setOnClickListener(new View.OnClickListener() {
+        mTextViewMessage.setVisibility(View.VISIBLE);
+        mTextViewMessage.setText("Tap to start the game!");
+        mCardImageView.setVisibility(View.GONE);
+
+        mTextViewMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTextView.setVisibility(View.GONE);
+                mTextViewMessage.setVisibility(View.GONE);
                 mCardImageView.setVisibility(View.VISIBLE);
                 startGame();
             }
@@ -87,7 +105,24 @@ public class GameFragment extends Fragment{
     }
 
     private void checkForGameOver() {
-        // TODO use handler??
+        if (mGameOver) {
+            mTextViewMessage.setVisibility(View.VISIBLE);
+            mTextViewMessage.setText("Tap to start a new game!");
+            mCardImageView.setVisibility(View.GONE);
+        }
+    }
+
+    private void createCountDownTimer() {
+        mCountDownTimer = new CountDownTimer(mTimerSeconds, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                mTextViewTimer.setText("seconds: " + millisUntilFinished / 999);
+            }
+
+            public void onFinish() {
+                mTextViewTimer.setText("Lost!");
+            }
+        };
     }
 
     public static GameFragment newInstance() {
