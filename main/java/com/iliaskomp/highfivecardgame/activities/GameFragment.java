@@ -180,10 +180,7 @@ public class GameFragment extends Fragment{
     private void gameOver() {
         mGameOver = true;
         setHasOptionsMenu(false);
-
-        mTextViewMessage.setVisibility(View.VISIBLE);
-        mTextViewMessage.setText("Deck is over. \nTap to start a new game!");
-        mCardImageView.setVisibility(View.GONE);
+        waitToStart();
     }
 
     private void createCountDownTimer() {
