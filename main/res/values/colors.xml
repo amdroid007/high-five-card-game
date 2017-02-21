@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--DEFAULT THEME COLOR VALUES -->
     <!--<color name="colorPrimary">#3F51B5</color>-->
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
     <!--<color name="colorAccent">#FF4081</color>-->
 
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!--<color name="colorPrimary">@color/md_light_green_800</color>-->
+    <!--<color name="colorPrimaryDark">@color/md_light_green_900</color>-->
+    <!--<color name="colorAccent">@color/md_deep_orange_A700</color>-->
     <!--<color name="textColor">#000000</color>-->
+    <!--<color name="colorBackground">@color/md_blue_50</color>-->
 
-
-
-    <!-- google's material design colours from
-    http://www.google.com/design/spec/style/color.html#color-ui-color-palette -->
+    <color name="colorPrimary">@color/md_amber_800</color>
+    <color name="colorPrimaryDark">@color/md_amber_900</color>
+    <color name="colorAccent">@color/md_deep_orange_A700</color>
+    <color name="textColor">#000000</color>
+    <color name="colorBackground">@color/md_amber_100</color>
 
     <!--reds-->
     <color name="md_red_50">#FFEBEE</color>
