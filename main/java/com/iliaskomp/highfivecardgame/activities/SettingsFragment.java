@@ -10,10 +10,6 @@ import android.preference.PreferenceGroup;
 
 import com.iliaskomp.highfivecardgame.R;
 
-/**
- * Created by IliasKomp on 21/02/17.
- */
-
 public class SettingsFragment extends PreferenceFragment
         implements SharedPreferences.OnSharedPreferenceChangeListener{
 

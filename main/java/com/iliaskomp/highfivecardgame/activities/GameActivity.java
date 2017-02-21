@@ -8,12 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.iliaskomp.highfivecardgame.R;
 
-/**
- * Created by IliasKomp on 20/02/17.
- */
-
 public class GameActivity extends AppCompatActivity {
-    private static final String GAME_FRAGMENT_TAG = "GameFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +21,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public static Intent newIntent(Context context) {
-        Intent intent = new Intent(context, GameActivity.class);
-        return intent;
+        return new Intent(context, GameActivity.class);
     }
 }

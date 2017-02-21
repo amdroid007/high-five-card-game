@@ -11,10 +11,6 @@ import android.widget.TextView;
 
 import com.iliaskomp.highfivecardgame.R;
 
-/**
- * Created by IliasKomp on 21/02/17.
- */
-
 public class RuleDialogFragment extends DialogFragment {
     private static final String ARGS_RULE_DESCRIPTION = "ruleDescription";
 
@@ -23,7 +19,7 @@ public class RuleDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_my_dialog, null);
 
-        String ruleDescription = (String) getArguments().getString(ARGS_RULE_DESCRIPTION);
+        String ruleDescription = getArguments().getString(ARGS_RULE_DESCRIPTION);
 
         TextView textViewRule = (TextView) v.findViewById(R.id.text_view_rule);
         textViewRule.setText(ruleDescription);

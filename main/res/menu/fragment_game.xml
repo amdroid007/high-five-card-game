@@ -4,7 +4,7 @@
 
 
     <item android:id="@+id/menu_item_show_rule"
-          android:title="Show rule"
+          android:title="@string/menu_show_rule"
           app:showAsAction="ifRoom|withText"
           android:icon="@drawable/ic_menu_show_rule"
         />

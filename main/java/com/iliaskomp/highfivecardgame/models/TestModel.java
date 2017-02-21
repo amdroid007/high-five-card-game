@@ -2,10 +2,6 @@ package com.iliaskomp.highfivecardgame.models;
 
 import java.util.List;
 
-/**
- * Created by IliasKomp on 19/02/17.
- */
-
 public class TestModel {
 
     public static void main(String[] args){

@@ -15,6 +15,7 @@
         android:layout_height="match_parent"/>
 
     <ImageView
+        android:contentDescription="@string/image_description_drawn_card"
         tools:src="@drawable/eight_of_clubs"
         tools:visibility="visible"
         android:id="@+id/image_view_cards"
@@ -32,5 +33,7 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
+
+    <!--TODO grid for random images-->
 
 </LinearLayout>

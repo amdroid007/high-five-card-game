@@ -24,9 +24,6 @@ import com.iliaskomp.highfivecardgame.R;
 import com.iliaskomp.highfivecardgame.models.Card;
 import com.iliaskomp.highfivecardgame.models.Deck;
 
-/**
- * Created by IliasKomp on 20/02/17.
- */
 public class GameFragment extends Fragment{
     private static final String TAG = "GameFragment";
     private static final String DIALOG_RULE = "DialogRule";
@@ -44,7 +41,6 @@ public class GameFragment extends Fragment{
     private SoundPool mSoundPool;
     private static boolean mSoundLoadComplete = false;
 
-    private SharedPreferences mPreferences;
     private int mTimerSeconds;
     private boolean mRandomMode = false;
 
@@ -97,8 +93,6 @@ public class GameFragment extends Fragment{
 
         mGameOver = false;
         setHasOptionsMenu(true);
-
-//        Log.d(TAG, mDeck.toString());
 
         drawCardInFragment();
 
@@ -154,10 +148,9 @@ public class GameFragment extends Fragment{
 
         if (!mRandomMode) {
             mDeck.addDefaultRules();
-            mTextViewMessage.setText("Tap to start the game!");
+            mTextViewMessage.setText(R.string.message_start_game);
         } else {
             mDeck.addRandomRules();
-//            mTextViewMessage.setText(textForRandomMode());
             mTextViewMessage.setText(textForRandomMode());
             for (Card.RANK rank : mDeck.getRanksWithRandomRules()) {
                 Log.d(TAG, rank.toString() + "");
@@ -189,12 +182,12 @@ public class GameFragment extends Fragment{
         mCountDownTimer = new CountDownTimer(mTimerSeconds, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                mTextViewTimer.setText("seconds: " + millisUntilFinished / 999);
+                mTextViewTimer.setText(String.format(getString(R.string.message_timer_seconds), millisUntilFinished / 999));
                 if (mSoundLoadComplete) mSoundPool.play(tickSoundId, 1, 1, 0, 0, 1);
             }
 
             public void onFinish() {
-                mTextViewTimer.setText("Lost! (Tap here to continue)");
+                mTextViewTimer.setText(R.string.message_lost);
                 mTurnOver = true;
                 if (mSoundLoadComplete) mSoundPool.play(alarmSoundId, 1, 1, 0, 0, 1);
             }
@@ -226,10 +219,10 @@ public class GameFragment extends Fragment{
     }
 
     private void initPreferences() {
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        mTimerSeconds = Integer.parseInt(mPreferences.getString("pref_timer", "")) * 1000 + 100;
-        mRandomMode = mPreferences.getBoolean("pref_random_mode", false);
+        mTimerSeconds = Integer.parseInt(preferences.getString("pref_timer", "")) * 1000 + 100;
+        mRandomMode = preferences.getBoolean("pref_random_mode", false);
     }
 
     private String textForRandomMode() {

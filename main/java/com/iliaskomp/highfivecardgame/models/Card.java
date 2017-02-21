@@ -1,9 +1,5 @@
 package com.iliaskomp.highfivecardgame.models;
 
-/**
- * Created by IliasKomp on 19/02/17.
- */
-
 public class Card {
     public enum SUIT {
         SPADES,
@@ -25,11 +21,11 @@ public class Card {
         JACK,
         QUEEN,
         KING,
-        ACE;
+        ACE
     }
 
-    private SUIT mSuit;
-    private RANK mRank;
+    private final SUIT mSuit;
+    private final RANK mRank;
     private Rule mRule;
     private String drawableString;
 

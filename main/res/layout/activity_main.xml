@@ -13,6 +13,7 @@
     tools:context="com.iliaskomp.highfivecardgame.activities.MainActivity">
 
     <ImageView
+        android:contentDescription="@string/image_description_logo"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:id="@+id/imageView"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:padding="24dp"
-            android:text="Start game"
+            android:text="@string/button_start_game"
 
             />
 
@@ -44,7 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="24dp"
-            android:text="Settings"
+            android:text="@string/button_settings"
+
             />
     </LinearLayout>
 

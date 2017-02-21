@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by IliasKomp on 19/02/17.
- */
-
 public class Deck {
     private static final String TAG = "Deck";
 
@@ -57,11 +53,11 @@ public class Deck {
     public void addDefaultRules() {
         Log.d(TAG, "Adding default rules to cards...");
 
-        Rule rule1 = new Rule(0, "Default. High five the person before you.");
-        Rule rule2 = new Rule(1, "High five the person after you.");
-        Rule rule3 = new Rule(2, "High five yourself.");
-        Rule rule4 = new Rule(3, "High five both players around you.");
-        Rule rule5 = new Rule(4, "Don't do anything. Direction changes.");
+        Rule rule1 = new Rule("Default. High five the person before you.");
+        Rule rule2 = new Rule("High five the person after you.");
+        Rule rule3 = new Rule("High five yourself.");
+        Rule rule4 = new Rule("High five both players around you.");
+        Rule rule5 = new Rule("Don't do anything. Direction changes.");
 
         for (Card card : cards) {
             switch (card.getRank()) {
@@ -104,7 +100,7 @@ public class Deck {
         return currentCard;
     }
 
-    public void burnDrawnCard() {
+    private void burnDrawnCard() {
         cards.remove(0);
     }
 
@@ -125,11 +121,11 @@ public class Deck {
     public void addRandomRules() {
         Log.d(TAG, "Adding random rules to cards...");
 
-        Rule rule0 = new Rule(0, "Default. High five the person before you.");
-        Rule rule1 = new Rule(1, "High five the person after you.");
-        Rule rule2 = new Rule(2, "High five yourself.");
-        Rule rule3 = new Rule(3, "High five both players around you.");
-        Rule rule4 = new Rule(4, "Don't do anything. Direction changes.");
+        Rule rule0 = new Rule("Default. High five the person before you.");
+        Rule rule1 = new Rule("High five the person after you.");
+        Rule rule2 = new Rule("High five yourself.");
+        Rule rule3 = new Rule("High five both players around you.");
+        Rule rule4 = new Rule("Don't do anything. Direction changes.");
 
         List<Integer> random = new ArrayList<>();
         for (int i = 0; i < 12; i++) {

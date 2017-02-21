@@ -5,10 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * Created by IliasKomp on 21/02/17.
- */
-
 public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +12,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         // Display the fragment as the main content.
         getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new SettingsFragment())
+                .replace(android.R.id.content, SettingsFragment.newInstance())
                 .commit();
     }
 
