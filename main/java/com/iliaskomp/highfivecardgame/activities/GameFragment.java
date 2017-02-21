@@ -27,7 +27,6 @@ import com.iliaskomp.highfivecardgame.models.Deck;
 /**
  * Created by IliasKomp on 20/02/17.
  */
-// TODO check gameover value when onResume?
 public class GameFragment extends Fragment{
     private static final String TAG = "GameFragment";
     private static final String DIALOG_RULE = "DialogRule";

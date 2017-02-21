@@ -3,7 +3,6 @@ package com.iliaskomp.highfivecardgame.models;
 /**
  * Created by IliasKomp on 19/02/17.
  */
-//TODO maybe static getDeck method/private constructor?
 
 public class Card {
     public enum SUIT {
