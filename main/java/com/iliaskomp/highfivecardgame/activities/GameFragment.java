@@ -1,4 +1,4 @@
-package com.iliaskomp.highfivecardgame;
+package com.iliaskomp.highfivecardgame.activities;
 
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -7,13 +7,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.iliaskomp.highfivecardgame.R;
 import com.iliaskomp.highfivecardgame.models.Deck;
 
 /**
@@ -22,6 +27,7 @@ import com.iliaskomp.highfivecardgame.models.Deck;
 // TODO check gameover value when onResume?
 public class GameFragment extends Fragment{
     private static final String TAG = "GameFragment";
+    private static final String DIALOG_RULE = "DialogRule";
 
     private TextView mTextViewMessage;
     private ImageView mCardImageView;
@@ -60,10 +66,33 @@ public class GameFragment extends Fragment{
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_game, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_show_rule:
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                RuleDialogFragment dialog = RuleDialogFragment.newInstance(
+                        mDeck.getCurrentCard().getRule().getDescription());
+                dialog.show(fm, DIALOG_RULE);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
     private void startGame() {
         Log.d(TAG, "Game starts");
 
         mGameOver = false;
+        setHasOptionsMenu(true);
+
         mDeck = new Deck();
         drawCardInFragment();
 
@@ -126,6 +155,7 @@ public class GameFragment extends Fragment{
 
     private void gameOver() {
         mGameOver = true;
+        setHasOptionsMenu(false);
 
         mTextViewMessage.setVisibility(View.VISIBLE);
         mTextViewMessage.setText("Deck is over. \nTap to start a new game!");

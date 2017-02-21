@@ -1,10 +1,12 @@
-package com.iliaskomp.highfivecardgame;
+package com.iliaskomp.highfivecardgame.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+
+import com.iliaskomp.highfivecardgame.R;
 
 /**
  * Created by IliasKomp on 20/02/17.
