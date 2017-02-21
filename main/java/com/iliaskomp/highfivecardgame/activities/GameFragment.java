@@ -1,11 +1,13 @@
 package com.iliaskomp.highfivecardgame.activities;
 
+import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -37,18 +39,21 @@ public class GameFragment extends Fragment{
     private boolean mGameOver = false;
     private boolean mTurnOver = false;
 
-    private static int mTimerSeconds = 3100;
     private CountDownTimer mCountDownTimer;
 
     private SoundPool mSoundPool;
     private static boolean mSoundLoadComplete = false;
 
+    private SharedPreferences mPreferences;
+    private int mTimerSeconds;
+    private boolean mRandomMode = false;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        initPreferences();
         initSoundPool();
         createCountDownTimer();
     }
@@ -140,8 +145,12 @@ public class GameFragment extends Fragment{
         Log.d(TAG, "Game waits to start...");
 
         mTextViewMessage.setVisibility(View.VISIBLE);
-        mTextViewMessage.setText("Tap to start the game!");
         mCardImageView.setVisibility(View.GONE);
+        if (!mRandomMode) {
+            mTextViewMessage.setText("Tap to start the game!");
+        } else {
+            mTextViewMessage.setText("Tap to start the game \n Random mode!");
+        }
 
         mTextViewMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,7 +174,7 @@ public class GameFragment extends Fragment{
     private void createCountDownTimer() {
         final int tickSoundId = mSoundPool.load(getActivity(), R.raw.tick, 1);
         final int alarmSoundId = mSoundPool.load(getActivity(), R.raw.alarm, 1);
-
+        Log.d(TAG, "mTimerSeconds in createCountDownTimer " + mTimerSeconds);
         mCountDownTimer = new CountDownTimer(mTimerSeconds, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -203,6 +212,14 @@ public class GameFragment extends Fragment{
             }
         });
 
+    }
+
+    private void initPreferences() {
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        mTimerSeconds = Integer.parseInt(mPreferences.getString("pref_timer", "")) * 1000 + 100;
+        mRandomMode = Boolean.parseBoolean("pref_random_mode");
+        Log.d("RANDOMMODE", mRandomMode + "");
     }
 
     public static GameFragment newInstance() {

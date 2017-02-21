@@ -1,6 +1,5 @@
 package com.iliaskomp.highfivecardgame.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,8 +19,15 @@ public class MainActivity extends AppCompatActivity {
         buttonStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = GameActivity.newIntent(getApplicationContext());
-                startActivity(intent);
+                startActivity(GameActivity.newIntent(getApplicationContext()));
+            }
+        });
+
+        Button buttonSettings = (Button) findViewById(R.id.button_settings);
+        buttonSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(SettingsActivity.newIntent(getApplicationContext()));
             }
         });
     }

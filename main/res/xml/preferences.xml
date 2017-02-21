@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:key="pref_timer"
+        android:title="Time limit"
+        android:defaultValue="3"
+        />
+
+    <SwitchPreference
+        android:key="pref_random_mode"
+        android:title="Random Mode"
+        android:summary="If random mode is enabled, every game the rules will be on different cards"
+        android:defaultValue="false"
+        />
+
+
+</PreferenceScreen>
