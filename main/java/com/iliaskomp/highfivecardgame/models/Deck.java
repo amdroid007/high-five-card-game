@@ -12,6 +12,7 @@ public class Deck {
     private List<Card> cards = new ArrayList<>();
     private Card currentCard = null;
     private List<Card.RANK> randomCards = null;
+    private List<Card.RANK> defaultCards = null;
 
     public Deck() {
         createDeck();
@@ -78,6 +79,12 @@ public class Deck {
                     break;
             }
         }
+        defaultCards = new ArrayList<>();
+        defaultCards.add(Card.RANK.FIVE);
+        defaultCards.add(Card.RANK.TEN);
+        defaultCards.add(Card.RANK.QUEEN);
+        defaultCards.add(Card.RANK.ACE);
+
 
     }
 
@@ -163,6 +170,10 @@ public class Deck {
         return randomCards;
     }
 
+    public List<Card.RANK> getRanksWithDefaultRules() {
+        return defaultCards;
+    }
+
     public String getRuleDescriptionFromRank(Card.RANK rank) {
         for (Card card : getCards()) {
             if (card.getRank() == rank) {
@@ -171,4 +182,15 @@ public class Deck {
         }
         return null;
     }
+
+    public String getDrawableStringFromRank(Card.RANK rank) {
+        for (Card card : getCards()) {
+            if (card.getRank() == rank && card.getSuit() ==Card.SUIT.HEARTS) {
+                return card.getDrawableString();
+            }
+        }
+        return null;
+    }
+
+
 }

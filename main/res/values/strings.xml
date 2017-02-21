@@ -1,15 +1,20 @@
 <resources>
-    <string name="app_name">High Five Party Game</string>
+    <string name="app_name">High Five</string>
 
     <!--Main Screen-->
     <string name="button_start_game">Start game</string>
     <string name="button_settings">Settings</string>
     <string name="menu_show_rule">Show rule</string>
-    <string name="message_start_game">Tap to start the game!</string>
+
+    <string name="message_start_game_default_mode">Tap here to start the game \n(Default mode)</string>
+    <string name="message_start_game_random_mode">Tap here to start the game \n(Random mode)</string>
     <string name="message_lost">Lost! (Tap here to continue)</string>
     <string name="message_timer_seconds">Seconds: %d</string>
+
     <string name="image_description_logo">Logo</string>
     <string name="image_description_drawn_card">Drawn Card</string>
+    <string name="action_bar_title_settings">\"Settings\"</string>
+    <string name="action_bar_title_game">\"Game\"</string>
 
 
 </resources>

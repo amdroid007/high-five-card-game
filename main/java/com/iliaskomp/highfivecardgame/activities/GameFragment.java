@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.GridLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,13 +25,18 @@ import com.iliaskomp.highfivecardgame.R;
 import com.iliaskomp.highfivecardgame.models.Card;
 import com.iliaskomp.highfivecardgame.models.Deck;
 
+import java.util.List;
+
 public class GameFragment extends Fragment{
     private static final String TAG = "GameFragment";
     private static final String DIALOG_RULE = "DialogRule";
 
+    private View mView;
+
     private TextView mTextViewMessage;
     private ImageView mCardImageView;
     private TextView mTextViewTimer;
+    private GridLayout mGridLayoutRules;
 
     private Deck mDeck;
     private boolean mGameOver = false;
@@ -48,7 +54,6 @@ public class GameFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         initPreferences();
         initSoundPool();
         createCountDownTimer();
@@ -56,15 +61,16 @@ public class GameFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_game, container, false);
+        mView = inflater.inflate(R.layout.fragment_game, container, false);
 
-        mCardImageView = (ImageView) view.findViewById(R.id.image_view_cards);
-        mTextViewMessage = (TextView) view.findViewById(R.id.text_view_message);
-        mTextViewTimer = (TextView) view.findViewById(R.id.text_view_timer);
+        mCardImageView = (ImageView) mView.findViewById(R.id.image_view_cards);
+        mTextViewMessage = (TextView) mView.findViewById(R.id.text_view_message);
+        mTextViewTimer = (TextView) mView.findViewById(R.id.text_view_timer);
+        mGridLayoutRules = (GridLayout) mView.findViewById(R.id.grid_layout_card_rules);
 
         waitToStart();
 
-        return view;
+        return mView;
     }
 
     @Override
@@ -136,6 +142,13 @@ public class GameFragment extends Fragment{
                 getActivity().getPackageName());
     }
 
+    private int getResourceIdForCard(String drawableString) {
+        return this.getResources().getIdentifier(
+                drawableString,
+                "drawable",
+                getActivity().getPackageName());
+    }
+
     private void waitToStart() {
         Log.d(TAG, "Game waits to start...");
 
@@ -145,13 +158,16 @@ public class GameFragment extends Fragment{
 
         mTextViewMessage.setVisibility(View.VISIBLE);
         mCardImageView.setVisibility(View.GONE);
+        mGridLayoutRules.setVisibility(View.VISIBLE);
 
         if (!mRandomMode) {
             mDeck.addDefaultRules();
-            mTextViewMessage.setText(R.string.message_start_game);
+            mTextViewMessage.setText(R.string.message_start_game_default_mode);
+            addCardsRulesToGrid();
         } else {
             mDeck.addRandomRules();
-            mTextViewMessage.setText(textForRandomMode());
+            mTextViewMessage.setText(R.string.message_start_game_random_mode);
+            addCardsRulesToGrid();
             for (Card.RANK rank : mDeck.getRanksWithRandomRules()) {
                 Log.d(TAG, rank.toString() + "");
             }
@@ -162,11 +178,36 @@ public class GameFragment extends Fragment{
             public void onClick(View view) {
                 mTextViewMessage.setVisibility(View.GONE);
                 mCardImageView.setVisibility(View.VISIBLE);
+                mGridLayoutRules.setVisibility(View.GONE);
                 startGame();
             }
         });
     }
 
+    private void addCardsRulesToGrid() {
+        ImageView imageViewCard1 = (ImageView) mView.findViewById(R.id.image_view_rules_card1);
+        ImageView imageViewCard2 = (ImageView) mView.findViewById(R.id.image_view_rules_card2);
+        ImageView imageViewCard3 = (ImageView) mView.findViewById(R.id.image_view_rules_card3);
+        ImageView imageViewCard4 = (ImageView) mView.findViewById(R.id.image_view_rules_card4);
+
+        TextView textViewCard1 = (TextView) mView.findViewById(R.id.text_view_rules_card1);
+        TextView textViewCard2 = (TextView) mView.findViewById(R.id.text_view_rules_card2);
+        TextView textViewCard3 = (TextView) mView.findViewById(R.id.text_view_rules_card3);
+        TextView textViewCard4 = (TextView) mView.findViewById(R.id.text_view_rules_card4);
+        List<Card.RANK> ruleCards;
+
+        ruleCards = mRandomMode ? mDeck.getRanksWithRandomRules() : mDeck.getRanksWithDefaultRules();
+
+        imageViewCard1.setImageResource(getResourceIdForCard(mDeck.getDrawableStringFromRank(ruleCards.get(0))));
+        imageViewCard2.setImageResource(getResourceIdForCard(mDeck.getDrawableStringFromRank(ruleCards.get(1))));
+        imageViewCard3.setImageResource(getResourceIdForCard(mDeck.getDrawableStringFromRank(ruleCards.get(2))));
+        imageViewCard4.setImageResource(getResourceIdForCard(mDeck.getDrawableStringFromRank(ruleCards.get(3))));
+
+        textViewCard1.setText(mDeck.getRuleDescriptionFromRank(ruleCards.get(0)));
+        textViewCard2.setText(mDeck.getRuleDescriptionFromRank(ruleCards.get(1)));
+        textViewCard3.setText(mDeck.getRuleDescriptionFromRank(ruleCards.get(2)));
+        textViewCard4.setText(mDeck.getRuleDescriptionFromRank(ruleCards.get(3)));
+    }
 
 
     private void gameOver() {
@@ -223,22 +264,6 @@ public class GameFragment extends Fragment{
 
         mTimerSeconds = Integer.parseInt(preferences.getString("pref_timer", "")) * 1000 + 100;
         mRandomMode = preferences.getBoolean("pref_random_mode", false);
-    }
-
-    private String textForRandomMode() {
-
-        StringBuilder sb = new StringBuilder(6);
-        sb.append("Tap to start the game \n(Random mode!) \n\n\n");
-
-        for (Card.RANK rank : mDeck.getRanksWithRandomRules()) {
-            Log.d(TAG, rank.toString() + "");
-            sb.append(rank.toString())
-                    .append(": ")
-                    .append(mDeck.getRuleDescriptionFromRank(rank))
-                    .append("\n");
-        }
-
-        return sb.toString();
     }
 
     public static GameFragment newInstance() {
