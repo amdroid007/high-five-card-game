@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--TODO change toolbar -->
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,15 +10,14 @@
     >
 
     <TextView
-        android:background="@color/md_amber_500"
         android:id="@+id/text_view_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
-        android:gravity="center"
         android:layout_weight="1"
+        android:background="@color/md_amber_500"
+        android:gravity="center"
         android:textSize="24sp"
-        android:shadowColor="@color/md_grey_500"
         tools:text="@string/message_start_game_default_mode"
         tools:visibility="visible"/>
 
@@ -27,8 +25,8 @@
         android:id="@+id/grid_layout_card_rules"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_margin="12dp"
+        android:layout_weight="1"
         app:columnCount="4"
         app:rowCount="2">
 
@@ -38,6 +36,8 @@
             android:layout_height="100dp"
             android:layout_marginBottom="12dp"
             android:layout_marginRight="12dp"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@string/image_description_start_card_1"
             app:layout_columnWeight="1"
             tools:src="@drawable/eight_of_clubs"/>
 
@@ -55,6 +55,8 @@
             android:layout_height="100dp"
             android:layout_marginBottom="12dp"
             android:layout_marginRight="12dp"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@string/image_description_start_card_2"
             app:layout_columnWeight="1"
             tools:src="@drawable/eight_of_clubs"/>
 
@@ -72,6 +74,8 @@
             android:layout_height="100dp"
             android:layout_marginBottom="12dp"
             android:layout_marginRight="12dp"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@string/image_description_start_card_3"
             app:layout_columnWeight="1"
             tools:src="@drawable/eight_of_clubs"/>
 
@@ -89,6 +93,8 @@
             android:layout_height="100dp"
             android:layout_marginBottom="12dp"
             android:layout_marginRight="12dp"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@string/image_description_start_card_4"
             app:layout_columnWeight="1"
             tools:src="@drawable/eight_of_clubs"/>
 
@@ -100,6 +106,7 @@
             app:layout_columnWeight="2"
             tools:text="Rule 1 does this and this"/>
     </android.support.v7.widget.GridLayout>
+
 
     <ImageView
         android:id="@+id/image_view_cards"
@@ -121,6 +128,4 @@
         android:textSize="24sp"
         tools:text="3"
         tools:visibility="gone"/>
-
-
 </LinearLayout>
