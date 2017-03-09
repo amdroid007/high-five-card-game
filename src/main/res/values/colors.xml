@@ -11,11 +11,16 @@
     <!--<color name="textColor">#000000</color>-->
     <!--<color name="colorBackground">@color/md_blue_50</color>-->
 
-    <color name="colorPrimary">@color/md_amber_800</color>
-    <color name="colorPrimaryDark">@color/md_amber_900</color>
+    <color name="colorPrimary">@color/md_amber_700</color>
+    <color name="colorPrimaryDark">@color/md_amber_800</color>
     <color name="colorAccent">@color/md_deep_orange_A700</color>
     <color name="textColor">#000000</color>
-    <color name="colorBackground">@color/md_amber_100</color>
+    <!--<color name="colorBackground">@color/md_amber_100</color>-->
+    <color name="colorBackground">@color/md_white_1000</color>
+
+    <!--Buttons-->
+    <!--<color name="colorBackgroundButton">@color/md_amber_900</color>-->
+    <!--<color name="colorTextButton"></color>-->
 
     <!--reds-->
     <color name="md_red_50">#FFEBEE</color>

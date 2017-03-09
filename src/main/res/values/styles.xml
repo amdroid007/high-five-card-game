@@ -13,11 +13,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
         <item name="android:windowBackground">@color/colorBackground</item>
         <!--<item name="textColor">@color/primary_text</item>-->
         <!--<item name="textColorSecondary">@color/secondary_text</item>-->
 
-
     </style>
+
+    <style name="buttonStyle">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorBackground</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
