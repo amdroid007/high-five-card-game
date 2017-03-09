@@ -7,19 +7,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     >
 
-    <TextView
-        android:id="@+id/text_view_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:layout_weight="1"
-        android:background="@color/md_amber_500"
+    <!--<TextView-->
+        <!--android:id="@+id/text_view_message"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@color/md_amber_500"-->
+        <!--android:gravity="center"-->
+        <!--android:textSize="24sp"-->
+        <!--tools:text="@string/message_start_game_default_mode"-->
+        <!--tools:visibility="visible"/>-->
+
+    <Button
+        android:id="@+id/button_click_start_game"
+        style="@style/buttonStyle"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:padding="@dimen/activity_horizontal_margin"
         android:gravity="center"
-        android:textSize="24sp"
         tools:text="@string/message_start_game_default_mode"
-        tools:visibility="visible"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/grid_layout_card_rules"

@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,10 +34,11 @@ public class GameFragment extends Fragment{
 
     private View mView;
 
-    private TextView mTextViewMessage;
+//    private TextView mTextViewMessage;
     private ImageView mCardImageView;
     private TextView mTextViewTimer;
     private GridLayout mGridLayoutRules;
+    private Button mButtonClickStartGame;
 
     private Deck mDeck;
     private boolean mGameOver = false;
@@ -64,9 +66,10 @@ public class GameFragment extends Fragment{
         mView = inflater.inflate(R.layout.fragment_game, container, false);
 
         mCardImageView = (ImageView) mView.findViewById(R.id.image_view_cards);
-        mTextViewMessage = (TextView) mView.findViewById(R.id.text_view_message);
+//        mTextViewMessage = (TextView) mView.findViewById(R.id.text_view_message);
         mTextViewTimer = (TextView) mView.findViewById(R.id.text_view_timer);
         mGridLayoutRules = (GridLayout) mView.findViewById(R.id.grid_layout_card_rules);
+        mButtonClickStartGame = (Button) mView.findViewById(R.id.button_click_start_game);
 
         waitToStart();
 
@@ -156,27 +159,27 @@ public class GameFragment extends Fragment{
 
 
 
-        mTextViewMessage.setVisibility(View.VISIBLE);
+        mButtonClickStartGame.setVisibility(View.VISIBLE);
         mCardImageView.setVisibility(View.GONE);
         mGridLayoutRules.setVisibility(View.VISIBLE);
 
         if (!mRandomMode) {
             mDeck.addDefaultRules();
-            mTextViewMessage.setText(R.string.message_start_game_default_mode);
+            mButtonClickStartGame.setText(R.string.message_start_game_default_mode);
             addCardsRulesToGrid();
         } else {
             mDeck.addRandomRules();
-            mTextViewMessage.setText(R.string.message_start_game_random_mode);
+            mButtonClickStartGame.setText(R.string.message_start_game_random_mode);
             addCardsRulesToGrid();
             for (Card.RANK rank : mDeck.getRanksWithRandomRules()) {
                 Log.d(TAG, rank.toString() + "");
             }
         }
 
-        mTextViewMessage.setOnClickListener(new View.OnClickListener() {
+        mButtonClickStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mTextViewMessage.setVisibility(View.GONE);
+                mButtonClickStartGame.setVisibility(View.GONE);
                 mCardImageView.setVisibility(View.VISIBLE);
                 mGridLayoutRules.setVisibility(View.GONE);
                 startGame();
