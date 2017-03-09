@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">High Five</string>
+    <string name="app_name">High Five Card Game</string>
 
     <!--Main Screen-->
     <string name="button_start_game">Start game</string>
@@ -20,6 +20,23 @@
     <string name="image_description_start_card_2">Rule Card 2</string>
     <string name="image_description_start_card_3">Rule Card 3</string>
     <string name="image_description_start_card_4">Rule Card 4</string>
+    <string name="info_description">
+        High Five is a simple card game where a player draws a card and should do the appropriate
+        high five according to the card rule. Each time a player miss a high five rule,
+        he/she is penalized. The penalty could be a drink, a dare or instead just play for fun!
+        \n\nThere are currently five rules :\n\n
+
+        1. The default rule is for cards that don not have special rule. The player should high five
+        the person before him.\n\n
+        2. The second rule is only for one card (default mode: 5) where the player should high five
+        the player after him\n\n
+        3. The third rule is (default mode: T) says that the player should high five both players around
+        him\n\n
+        4. The fourth rule (default mode: Q) says that the player should not do anything but also
+        the direction changes.\n\n
+        5. The fifth rule says that the player should high five himself.\n
+    </string>
+    <string name="action_bar_title_info">Information</string>
 
 
 </resources>
