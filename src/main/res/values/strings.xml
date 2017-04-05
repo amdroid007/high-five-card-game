@@ -37,6 +37,7 @@
         5. The fifth rule says that the player should high five himself.\n
     </string>
     <string name="action_bar_title_info">Information</string>
+    <string name="button_info">Info</string>
 
 
 </resources>

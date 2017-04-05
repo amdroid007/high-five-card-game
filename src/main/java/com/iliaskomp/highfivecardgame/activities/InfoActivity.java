@@ -8,10 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.iliaskomp.highfivecardgame.R;
 
-/**
- * Created by IliasKomp on 09/03/17.
- */
-
 public class InfoActivity extends AppCompatActivity {
 
     @Override

@@ -47,7 +47,7 @@
             style="@style/buttonStyle"
             android:id="@+id/button_info"
             android:layout_width="300dp"
-            android:text="Info"/>
+            android:text="@string/button_info"/>
 
     </LinearLayout>
 

@@ -2,7 +2,7 @@ package com.iliaskomp.highfivecardgame.models;
 
 import java.util.List;
 
-public class TestModel {
+class TestModel {
 
     public static void main(String[] args){
         Deck deck = new Deck();
